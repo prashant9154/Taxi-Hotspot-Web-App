@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const port = process.env.PORT || 8000;
 
 // Set public as static directory
 app.use(express.static("public"));
@@ -18,6 +19,6 @@ app.get("/", (req, res) => {
 });
 
 // Server setup
-app.listen(3000, () => {
-  console.log("The server started running on port 3000");
+app.listen(port, () => {
+  console.log(`The server started running on port ${port}`);
 });
