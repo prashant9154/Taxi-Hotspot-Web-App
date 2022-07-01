@@ -39,6 +39,7 @@ h1{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0px 15px;
     gap: 50px;
 }
 
@@ -82,4 +83,58 @@ h1{
     align-items: center;
     justify-content: center;
 
+}
+
+
+@media screen and (max-width:765px) {
+    #choose_parameter {
+       flex-direction: column;
+       align-items: flex-start;
+    }
+    .option_element{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .status_name {
+        height: 30px;
+        width: 80px;
+        font-size: small;
+    }
+}
+
+@media screen and (max-width:511px) {
+
+    #logo img {
+        width: 35px;
+        margin-right: 10px;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    #choose_parameter {
+       flex-direction: column;
+       align-items: flex-start;
+       gap: 20px;
+    }
+    .option_element{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .status_name {
+        height: 30px;
+        width: 80px;
+        font-size: small;
+    }
+    #status{
+        flex-wrap: wrap;
+        margin: 0 5px;
+    }
 }

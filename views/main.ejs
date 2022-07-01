@@ -15,7 +15,8 @@
     </div>
     <div id="main_container">
         <div id="choose_parameter">
-            <label for="zoneid">Choose zoneid:</label>
+               <div class="option_element">
+                <label for="zoneid">Choose zoneid:</label>
                 <select name="zone id" id="zoneid">
                     <option value="0">1</option>
                     <option value="1">2</option>
@@ -43,7 +44,9 @@
                     <option value="23">24</option>
                     <option value="24">25</option>
                 </select>
-            <label for="hourslot">Choose hourslot:</label>
+               </div>
+               <div class="option_element">
+                <label for="hourslot">Choose hourslot:</label>
                 <select name="hourslot" id="hourslot">
                     <option value="0">12:00AM - 01:00AM</option>
                     <option value="1">01:00AM - 02:00AM</option>
@@ -70,16 +73,20 @@
                     <option value="22">10:00PM - 11:00PM</option>
                     <option value="23">11:00PM - 12:00AM</option>
                 </select>
-            <label for="weekday">Choose weekday:</label>
-                <select name="weekday" id="weekday">
-                    <option value="0">Monday</option>
-                    <option value="1">Tuesday</option>
-                    <option value="2">Wednesday</option>
-                    <option value="3">Thursday</option>
-                    <option value="4">Friday</option>
-                    <option value="5">Saturday</option>
-                    <option value="6">Sunday</option>
-                </select>
+               </div>
+               <div class="option_element">
+                    <label for="weekday">Choose weekday:</label>
+                    <select name="weekday" id="weekday">
+                        <option value="0">Monday</option>
+                        <option value="1">Tuesday</option>
+                        <option value="2">Wednesday</option>
+                        <option value="3">Thursday</option>
+                        <option value="4">Friday</option>
+                        <option value="5">Saturday</option>
+                        <option value="6">Sunday</option>
+                    </select>
+               </div>
+                
                 <!-- <input type="text" class="input" name="zoneid" id="zoneid">
                 <input type="text" class="input" name="hourslot" id="hourslot">
                 <input type="text" class="input" name="weekday" id="weekday"> -->
