@@ -142,12 +142,12 @@
                 if (window.model) {
                     ans =  window.model.predict(tf.tensor2d(input, [1, 56])).dataSync();
  
-                    out.innerHTML =  ans*339.0;
+                    out.innerHTML =  (ans*339.0).toFixed(2);
                 } else {
                     setTimeout(function () {
                         ans =  window.model.predict(tf.tensor2d(input, [1, 56])).dataSync();
 
-                        out.innerHTML = ans*339.0;
+                        out.innerHTML = (ans*339.0).toFixed(2);
                     }, 50);
                 }
                 ans = ans*339.0;
