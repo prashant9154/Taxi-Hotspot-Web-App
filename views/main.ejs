@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxi Hotspot</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+    <link rel="stylesheet" href="style.css">
+    </script>
+</head>
+<body>
+    <div id="navbar">
+        <h1><span id="logo"><img src="logo.png" alt="logo"></span>Taxi Hotspot WebApp</h1>
+    </div>
+    <div id="main_container">
+        <div id="choose_parameter">
+            <label for="zoneid">Choose zoneid:</label>
+                <select name="zone id" id="zoneid">
+                    <option value="0">1</option>
+                    <option value="1">2</option>
+                    <option value="2">3</option>
+                    <option value="3">4</option>
+                    <option value="4">5</option>
+                    <option value="5">6</option>
+                    <option value="6">7</option>
+                    <option value="7">8</option>
+                    <option value="8">9</option>
+                    <option value="9">10</option>
+                    <option value="10">11</option>
+                    <option value="11">12</option>
+                    <option value="12">13</option>
+                    <option value="13">14</option>
+                    <option value="14">15</option>
+                    <option value="15">16</option>
+                    <option value="16">17</option>
+                    <option value="17">18</option>
+                    <option value="18">19</option>
+                    <option value="19">20</option>
+                    <option value="20">21</option>
+                    <option value="21">22</option>
+                    <option value="22">23</option>
+                    <option value="23">24</option>
+                    <option value="24">25</option>
+                </select>
+            <label for="hourslot">Choose hourslot:</label>
+                <select name="hourslot" id="hourslot">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                </select>
+            <label for="weekday">Choose weekday:</label>
+                <select name="weekday" id="weekday">
+                    <option value="0">Monday</option>
+                    <option value="1">Tuesday</option>
+                    <option value="2">Wednesday</option>
+                    <option value="3">Thursday</option>
+                    <option value="4">Friday</option>
+                    <option value="5">Saturday</option>
+                    <option value="6">Sunday</option>
+                </select>
+                <!-- <input type="text" class="input" name="zoneid" id="zoneid">
+                <input type="text" class="input" name="hourslot" id="hourslot">
+                <input type="text" class="input" name="weekday" id="weekday"> -->
+        </div>
+        <div id="btn-div">
+            <button id="btn" onclick="myFunction()">Predict Hire-Count</button>
+        </div>
+        <div id="hire_count">
+            <h2>HIRE COUNT : </h2>
+            <h2 id="out"></h2>
+        </div>
+        <div id="status">
+            <div class="status_name" id="vlow">Very Low</div>
+            <div class="status_name" id="low">Low</div>
+            <div class="status_name" id="mid">Medium</div>
+            <div class="status_name" id="high">High</div>
+            <div class="status_name" id="vhigh">Very High</div>
+        </div>
+    </div>
+        <script>
+            const myFunction = async ()=>{
+                const zoneid = await document.getElementById('zoneid');
+                const hourslot = await document.getElementById('hourslot');
+                const weekday = await document.getElementById('weekday');
+                const out = await document.getElementById('out');
+                const vlow = await document.getElementById('vlow');
+                const low = await document.getElementById('low');
+                const mid = await document.getElementById('mid');
+                const high = await document.getElementById('high');
+                const vhigh = await document.getElementById('vhigh');
+                vlow.style.backgroundColor = "rgb(197, 196, 196)";
+                low.style.backgroundColor = "rgb(197, 196, 196)";
+                mid.style.backgroundColor ="rgb(197, 196, 196)";
+                high.style.backgroundColor = "rgb(197, 196, 196)";
+                vhigh.style.backgroundColor = "rgb(197, 196, 196)";
+
+                const input = [];
+                const in1 = [];
+                for(i=0;i<25;i++){
+                    in1.push(0);
+                }
+                in1[zoneid.value - 1] = 1;
+                const in2 = [];
+                for(i=0;i<24;i++){
+                    in2.push(0);
+                }
+                in2[hourslot.value] = 1;
+                const in3 = []
+                for(i=0;i<7;i++){
+                    in3.push(0);
+                }
+                in3[weekday.value] = 1;
+                const temp = [...in1,...in2,...in3];
+                input.push(temp);
+
+                window.model = await tf.loadLayersModel("model/model.json");
+ 
+                // console.log(window.model)
+                let ans = 0;
+                if (window.model) {
+                    ans =  window.model.predict(tf.tensor2d(input, [1, 56])).dataSync();
+ 
+                    out.innerHTML =  ans*339.0;
+                } else {
+                    setTimeout(function () {
+                        ans =  window.model.predict(tf.tensor2d(input, [1, 56])).dataSync();
+
+                        out.innerHTML = ans*339.0;
+                    }, 50);
+                }
+                ans = ans*339.0;
+                if(ans<10){
+                    vlow.style.backgroundColor = "rgb(255, 21, 0)";
+                }else if(ans<30){
+                    low.style.backgroundColor = "rgb(255, 174, 0)";
+                }else if(ans<50){
+                    mid.style.backgroundColor = "rgb(204, 255, 0)";
+                }else if(ans<100){
+                    high.style.backgroundColor = "rgb(98, 255, 0)";
+                }else{
+                    vhigh.style.backgroundColor = "rgb(37, 197, 1)";
+                }
+            }
+
+        </script>
+</body>
+</html>
