@@ -4,7 +4,7 @@ const path = require("path");
 const port = process.env.PORT || 8000;
 
 // Set public as static directory
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(__dirname + "/public/"));
 
 app.set("views", path.join(__dirname, "/views"));
 
